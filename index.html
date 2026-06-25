@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyrell Freeman — GRC Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0D2340;
+      --teal:      #1A7F8E;
+      --teal-lt:   #E8F4F6;
+      --teal-mid:  #b0d8df;
+      --gray:      #4A4A4A;
+      --gray-lt:   #f5f5f5;
+      --gray-mid:  #888;
+      --white:     #ffffff;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--gray);
+      background: #fafafa;
+      line-height: 1.6;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--navy);
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    nav .logo {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.75rem;
+    }
+    nav ul a {
+      color: var(--teal-mid);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--white); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      color: var(--teal-mid);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero .contact {
+      color: #cce8ec;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+    }
+    .hero .contact a { color: #cce8ec; }
+    .hero .contact a:hover { color: var(--white); }
+    .hero-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); text-decoration: none; }
+    .btn-primary { background: var(--teal); color: var(--white); }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal-mid);
+      border: 1.5px solid var(--teal-mid);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 3.5rem 2rem; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .divider {
+      border: none;
+      border-top: 2px solid var(--teal);
+      margin-bottom: 1.75rem;
+      opacity: 0.4;
+    }
+
+    /* ── ABOUT ── */
+    #about p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--gray);
+      max-width: 780px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-top: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 1.1rem 1.25rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .skill-card h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .skill-card p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 2rem; }
+    .project-card {
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-left: 4px solid var(--teal);
+      border-radius: 4px;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+      transition: box-shadow 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.11); }
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .project-meta {
+      font-size: 0.8rem;
+      color: var(--teal);
+      font-style: italic;
+      margin-bottom: 0.85rem;
+    }
+    .project-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--gray);
+      margin-bottom: 0.85rem;
+    }
+    .project-card ul {
+      margin: 0 0 0.9rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .project-card ul li {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+    .tools-tag {
+      display: inline-block;
+      background: var(--teal-lt);
+      color: var(--teal);
+      font-size: 0.775rem;
+      font-weight: 600;
+      border-radius: 3px;
+      padding: 0.25rem 0.6rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); max-width: 100%; padding: 3rem 2rem; }
+    #contact .inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    #contact h2 { color: var(--white); }
+    #contact .divider { border-color: var(--teal); opacity: 0.5; }
+    #contact p { color: var(--teal-mid); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px;
+      padding: 0.5rem 1.1rem;
+      color: #cce8ec;
+      font-size: 0.875rem;
+      transition: background 0.2s;
+    }
+    .contact-pill:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--gray-mid);
+      background: #f0f0f0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav ul { gap: 1rem; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      section { padding: 2.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">Tyrell Freeman</span>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <h1>Tyrell Freeman</h1>
+  <p class="tagline">Cybersecurity Graduate Student &nbsp;|&nbsp; Governance, Risk &amp; Compliance</p>
+  <div class="contact">
+    <a href="mailto:empera8810@gmail.com">empera8810@gmail.com</a>
+    <span>|</span>
+    <a href="https://linkedin.com/in/[yourprofile]" target="_blank">LinkedIn</a>
+    <span>|</span>
+    <span>St. John's University — M.S. Cybersecurity</span>
+  </div>
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="Tyrell_Freeman_GRC_Portfolio.pdf" download>
+      &#8595; Download Portfolio PDF
+    </a>
+    <a class="btn btn-outline" href="#projects">View Projects</a>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <h2>Professional Summary</h2>
+  <hr class="divider" />
+  <p>
+    Cybersecurity graduate student at St. John's University with hands-on academic experience
+    in risk analysis, security control mapping, threat intelligence, and cloud-based incident
+    remediation. Applied the NIST Cybersecurity Framework, NIST SP&nbsp;800-53, OWASP, and
+    CIS Controls across coursework in secure scripting, cryptography, and AWS security operations.
+    Background in vendor management and operational logistics brings a practical perspective to
+    governance and third-party risk. Seeking a GRC internship to apply framework knowledge and
+    analytical skills in a professional environment.
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Competencies</p>
+  <h2>Core Skills</h2>
+  <hr class="divider" />
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Frameworks</h3>
+      <p>NIST CSF, NIST SP 800-53 (SC-12, SC-8), ISO 27001, OWASP Top 10, CIS Controls, MITRE ATT&CK, CISA Secure by Design</p>
+    </div>
+    <div class="skill-card">
+      <h3>GRC Competencies</h3>
+      <p>Security control mapping, risk assessment, threat analysis, incident remediation, IOC documentation, audit trail review</p>
+    </div>
+    <div class="skill-card">
+      <h3>Cloud &amp; Tools</h3>
+      <p>AWS CloudTrail, CloudWatch, EventBridge, Config, Lambda, IAM, VPC, SNS; Wireshark; Python; PowerShell</p>
+    </div>
+    <div class="skill-card">
+      <h3>Documentation</h3>
+      <p>Lab reporting, technical writing, policy-aligned procedure documentation, executive summaries, APA/IEEE citation</p>
+    </div>
+    <div class="skill-card">
+      <h3>Regulatory Awareness</h3>
+      <p>HIPAA, CISA advisories, FBI/HHS joint cybersecurity guidance, PKI certificate standards (X.509, DV/EV)</p>
+    </div>
+    <div class="skill-card">
+      <h3>Risk Intelligence</h3>
+      <p>Threat actor profiling, CVE analysis, SIEM/EDR alert design, IOC documentation, double-extortion kill chain analysis</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Academic Work</p>
+  <h2>GRC Projects</h2>
+  <hr class="divider" />
+  <div class="projects-list">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <h3>AWS Cloud Incident Detection &amp; Automated Remediation</h3>
+      <p class="project-meta">Module 13 Learning Activity &nbsp;|&nbsp; St. John's University &nbsp;|&nbsp; Spring 2026</p>
+      <p>
+        Configured and analyzed two AWS security labs covering automated incident detection and
+        cloud-based remediation workflows. Built a detection pipeline using CloudTrail, CloudWatch,
+        and EventBridge, then extended it to full automated remediation via AWS Config and Lambda.
+        Applied the NIST Cybersecurity Framework across all five functions to analyze both lab architectures.
+      </p>
+      <ul>
+        <li>Mapped lab architecture to all five NIST CSF functions — Identify, Protect, Detect, Respond, Recover — with specific AWS service-to-function mappings.</li>
+        <li>Simulated a misconfiguration incident (overly permissive EC2 security group rules) and verified Lambda automatically revoked unauthorized rules within minutes.</li>
+        <li>Reviewed IAM least-privilege scoping for AwsConfigRole and AwsConfigLambdaSGRole, confirming each role was limited to only required permissions.</li>
+        <li>Documented full audit trails via Config timelines, CloudWatch Logs Insights queries, and EventBridge event patterns.</li>
+      </ul>
+      <span class="tools-tag">AWS CloudTrail · CloudWatch · EventBridge · Config · Lambda · IAM · NIST CSF</span>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <h3>Cryptographic Key Distribution &amp; Management — PKI Security Analysis</h3>
+      <p class="project-meta">Module 12 Assessment &nbsp;|&nbsp; CYB 625: Principles in Secure Scripting &amp; Cryptography &nbsp;|&nbsp; St. John's University</p>
+      <p>
+        Group research report analyzing cryptographic key distribution and Public Key Infrastructure (PKI)
+        in enterprise environments. Examined CA trust hierarchies, mapped controls to NIST SP 800-53,
+        and demonstrated scripted approaches to automating certificate validation and CSR generation.
+      </p>
+      <ul>
+        <li>Mapped PKI practices to NIST SP 800-53 controls SC-12 (Key Establishment and Management) and SC-8 (Transmission Confidentiality and Integrity).</li>
+        <li>Analyzed certificate validation tiers (DV, OV, EV) and their use cases — demonstrating risk-proportionate control selection in practice.</li>
+        <li>Scripted X.509 certificate parsing in Python to automate detection of fraudulent certificates and Unicode phishing indicators.</li>
+        <li>Identified Unicode homograph attacks as a gap in CA validation and recommended enhanced monitoring controls.</li>
+      </ul>
+      <span class="tools-tag">Python · PowerShell · NIST SP 800-53 SC-12/SC-8 · X.509 PKI</span>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <h3>RansomHub Ransomware Threat Analysis — Risk &amp; IOC Assessment</h3>
+      <p class="project-meta">Module 12 Learning Activity: Malware in the News &nbsp;|&nbsp; St. John's University &nbsp;|&nbsp; April 2026</p>
+      <p>
+        Threat analysis of RansomHub, a Ransomware-as-a-Service operation that compromised over 210
+        organizations across healthcare, government, water utilities, and financial services. Grounded
+        in the FBI, CISA, and HHS joint advisory (AA24-242A), the analysis examined the group's attack
+        lifecycle, indicators of compromise, and organizational impact.
+      </p>
+      <ul>
+        <li>Documented network-based IOCs including C2 over port 443, lateral movement via RDP/SMB, Tor-based communications, and data exfiltration via MEGAsync and WinSCP.</li>
+        <li>Analyzed three actively exploited CVEs: CVE-2023-3519 (Citrix NetScaler RCE), CVE-2023-22515 (Atlassian Confluence), and CVE-2020-1472 ZeroLogon.</li>
+        <li>Identified persistence mechanisms including scheduled task masquerading, HKCU registry run key modifications, and abuse of RMM tools (AnyDesk, Atera).</li>
+        <li>Developed SIEM and EDR detection recommendations tied to VSS deletion commands, PowerShell/WMI abuse, and the double-extortion kill chain.</li>
+      </ul>
+      <span class="tools-tag">CISA Advisory AA24-242A · SIEM/EDR Concepts · CVE Analysis · Threat Intelligence</span>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <h3>Secure Scripting Techniques — Framework-Aligned Presentation</h3>
+      <p class="project-meta">Intrusion Detection &amp; Analysis &nbsp;|&nbsp; St. John's University</p>
+      <p>
+        Developed and delivered a 12-slide technical presentation on mitigating security risks through
+        secure scripting practices. Applied six authoritative security frameworks to scripting vulnerabilities
+        and defensive countermeasures, targeting an audience of cybersecurity practitioners and students.
+      </p>
+      <ul>
+        <li>Applied six frameworks: NIST SP 800-53, NIST SP 800-218 (SSDF), OWASP Top 10, CIS Benchmarks, MITRE ATT&CK T1059, and CISA Secure by Design.</li>
+        <li>Quantified business risk using IBM Cost of a Data Breach 2024 ($4.88M average cost) and Verizon DBIR to establish risk context before presenting controls.</li>
+        <li>Covered six vulnerability categories with corresponding Python, PowerShell, and shell hardening countermeasures.</li>
+        <li>Validated all 14 references against public sources, correcting outdated NIST CSRC URLs — reflecting the diligence expected in compliance documentation.</li>
+      </ul>
+      <span class="tools-tag">NIST SP 800-53 &amp; 800-218 · OWASP · CIS Benchmarks · MITRE ATT&CK · CISA</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <p class="section-label" style="color: var(--teal-mid);">Get in Touch</p>
+    <h2>Contact</h2>
+    <hr class="divider" />
+    <p>Open to GRC internship opportunities. Feel free to reach out via email or LinkedIn.</p>
+    <div class="contact-links">
+      <a class="contact-pill" href="mailto:empera8810@gmail.com">
+        ✉ empera8810@gmail.com
+      </a>
+      <a class="contact-pill" href="https://linkedin.com/in/[yourprofile]" target="_blank">
+        in LinkedIn
+      </a>
+      <a class="contact-pill" href="Tyrell_Freeman_GRC_Portfolio.pdf" download>
+        &#8595; Download Portfolio PDF
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Tyrell Freeman &mdash; M.S. Cybersecurity, St. John's University
+</footer>
+
+</body>
+</html>
