@@ -158,16 +158,18 @@
   <div class="category-block">
     <span class="category-label">Risk &amp; Compliance Management</span>
     <div class="projects-list">
-      Locked-Down Azure VM: NIST SP 800-53 Assessment, SSP & POA&M
-Independent Cloud GRC Project  |  Microsoft Azure  |  November 2026
-
-Built a hardened Ubuntu server in Azure with no public IP, assessed it against the NIST SP 800-53 Rev. 5 initiative in Azure Policy, and documented it as an authorization package: mini SSP, POA&M with risk register, remote access policy, and a 46-page evidence binder.
-
-Enforced deny-all inbound networking with access only through Azure Bastion and SSH keys; disabled password and root login.
-Found that patching silently failed (apt reported "up to date" with no egress path), traced the root cause, and verified the fix.
-Triaged 22 failing policies into real gaps, evaluation gaps, risk acceptances, and N/A; remediation brought failures from 22 to 19.
-NIST SP 800-53 Rev. 5 · FIPS 199 · NIST SP 800-30 · Azure Policy · Azure Bastion · NSG
-View project and evidence on GitHub →
+      <div class="project-card">
+        <h3>Locked-Down Azure VM: NIST SP 800-53 Assessment, SSP &amp; POA&amp;M</h3>
+        <p class="project-meta">Independent Cloud GRC Project &nbsp;|&nbsp; Microsoft Azure &nbsp;|&nbsp; November 2026</p>
+        <p>Built a hardened Ubuntu server in Azure with no public IP, assessed it against the NIST SP 800-53 Rev. 5 initiative in Azure Policy, and documented it as an authorization package: mini SSP, POA&amp;M with risk register, remote access policy, and a 46-page evidence binder.</p>
+        <ul>
+          <li>Enforced deny-all inbound networking with access only through Azure Bastion and SSH keys; disabled password and root login.</li>
+          <li>Found that patching silently failed (apt reported "up to date" with no egress path), traced the root cause, and verified the fix.</li>
+          <li>Triaged 22 failing policies into real gaps, evaluation gaps, risk acceptances, and N/A; remediation brought failures from 22 to 19.</li>
+        </ul>
+        <span class="tools-tag">NIST SP 800-53 Rev. 5 · FIPS 199 · NIST SP 800-30 · Azure Policy · Azure Bastion · NSG</span>
+        <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-1-locked-down-vm" target="_blank">View project and evidence on GitHub &rarr;</a></p>
+      </div>
 
       <div class="project-card">
         <h3>Third-Party Risk Assessment &amp; Security Documentation</h3>
