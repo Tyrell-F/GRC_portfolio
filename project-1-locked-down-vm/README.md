@@ -27,7 +27,7 @@ After the first patch run, `apt` reported the system "up to date" while every re
 | Baseline scan | 22 of 694 | 24 of 970 |
 | After remediation | 19 of 693 | 19 of 970 |
 
-I triaged the 22 failing policies as follows: 12 were evaluation gaps (no guest agent or Defender data), 6 were real configuration gaps, 3 were risk-accepted (backup, disaster recovery, DDoS protection), and 1 did not apply (SQL). The real gaps became POA&M items. Four are closed (root login, unused Bastion subnet, IP forwarding verification, budget alert recipient), and the rest are tracked with owners and dates.
+I triaged the 22 failing policies as follows: 12 were evaluation gaps (no guest agent or Defender data), 6 were real configuration gaps, 3 were risk-accepted (backup, disaster recovery, DDoS protection), and 1 did not apply (SQL). The real gaps became POA&M items. Four are closed (root login, unused Bastion subnet, IP forwarding verification, budget alert recipient), and the rest are tracked with owners and dates. Several were closed in [Project 2](../project-2-key-vault/) (Key Vault, customer-managed keys, and central logging).
 
 ## Files
 
