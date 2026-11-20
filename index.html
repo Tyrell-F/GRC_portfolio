@@ -170,6 +170,18 @@
         <span class="tools-tag">NIST SP 800-53 Rev. 5 · FIPS 199 · NIST SP 800-30 · Azure Policy · Azure Bastion · NSG</span>
         <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-1-locked-down-vm" target="_blank">View project and evidence on GitHub &rarr;</a></p>
       </div>
+      <div class="project-card">
+        </h3>Azure Key Vault & Customer-Managed Keys: SC-12 Standard, SSP v2 & Re-Assessment</h3>
+        <p Independent Cloud GRC Project  |  Microsoft Azure  |  November 2026</p>
+        
+        </p>Extended the locked-down VM with Azure Key Vault, customer-managed disk encryption, a least-privilege managed identity, and central logging, then re-assessed it against NIST SP 800-53 Rev. 5 and updated the SSP, POA&M, and risk register. Wrote a Cryptographic Key Management Standard for the system.</p>
+        <ul>
+          <li>Encrypted the OS disk with an RSA 3072 customer-managed key (auto-rotation, purge protection) and proved use with KeyUnwrap audit events.</li>
+          <li>Verified least privilege: the VM identity got 403 before access, then 200 for its one scoped secret and 403 for any other, all captured in KQL.</li>
+          <li>Cut non-compliant NIST controls from 24 to 17; found the VM record missing its encryption set reference and tracked it as a configuration finding.</li>
+        <span class="tools-tag">NIST SP 800-53 Rev. 5 · SC-12 · Azure Key Vault · Managed Identity · Log Analytics / KQL · Azure Policy</span>
+        <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-2-key-vault" target="_blank">View project and evidence on GitHub</a></p>
+      </div>
 
       <div class="project-card">
         <h3>Third-Party Risk Assessment &amp; Security Documentation</h3>
