@@ -1,0 +1,30 @@
+#cloud-config
+# Host baseline applied at first boot (CM-2, CM-6, CM-7).
+package_update: true
+package_upgrade: true
+packages:
+  - ufw
+  - unattended-upgrades
+  - lynis
+
+write_files:
+  # 10- sorts before the image's 50-cloud-init.conf, so these values win.
+  - path: /etc/ssh/sshd_config.d/10-grc-hardening.conf
+    permissions: "0644"
+    content: |
+      PermitRootLogin no
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    permissions: "0644"
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+
+runcmd:
+  # POAM-12: host firewall, default deny inbound, SSH only from inside the VNet.
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow from ${vnet_cidr} to any port 22 proto tcp
+  - ufw --force enable
+  - systemctl restart ssh
