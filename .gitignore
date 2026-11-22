@@ -1,0 +1,10 @@
+# Terraform state can hold sensitive values. Never commit it.
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+# Real variable values (SSH key, email) stay out of Git.
+terraform.tfvars
+*.auto.tfvars
