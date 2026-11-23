@@ -76,6 +76,15 @@ resource "azapi_resource" "cmk" {
 
   response_export_values = ["properties.keyUri", "properties.keyUriWithVersion"]
   depends_on             = [azurerm_role_assignment.kv_admin_owner]
+
+  # Azure stores these as "Rotate"/"Notify" but only accepts lowercase on write,
+  # so the case difference would show as a change on every plan.
+  lifecycle {
+    ignore_changes = [
+      body.properties.rotationPolicy.lifetimeActions[0].action.type,
+      body.properties.rotationPolicy.lifetimeActions[1].action.type,
+    ]
+  }
 }
 
 # Placeholder value only. Never put a real credential here.
