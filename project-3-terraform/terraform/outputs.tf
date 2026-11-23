@@ -19,5 +19,5 @@ output "vm_private_ip" {
 }
 
 output "disk_encryption_set_id" {
-  value = azurerm_disk_encryption_set.des.id
+  value = azapi_resource.des.id
 }
