@@ -42,7 +42,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     name                   = "osdisk-vm-grc-01"
     caching                = "ReadWrite"
     storage_account_type   = "StandardSSD_LRS"
-    disk_encryption_set_id = azurerm_disk_encryption_set.des.id
+    disk_encryption_set_id = azapi_resource.des.id
   }
 
   source_image_reference {
