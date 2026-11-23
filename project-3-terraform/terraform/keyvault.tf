@@ -152,10 +152,15 @@ resource "azapi_resource" "des" {
       encryptionType                    = "EncryptionAtRestWithPlatformAndCustomerKeys"
       rotationToLatestKeyVersionEnabled = true
       activeKey = {
-        keyUrl      = azapi_resource.cmk.output.properties.keyUri
+        keyUrl      = azapi_resource.cmk.output.properties.keyUriWithVersion
         sourceVault = { id = azurerm_key_vault.kv.id }
       }
     }
+  }
+
+  # Auto-rotation moves keyUrl to each new key version; that is expected, not drift.
+  lifecycle {
+    ignore_changes = [body.properties.activeKey.keyUrl]
   }
 }
 
