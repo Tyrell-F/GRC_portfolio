@@ -134,24 +134,35 @@ resource "azurerm_private_endpoint" "kv" {
 }
 
 # ---- Disk encryption set with double encryption (POAM-03, RA-04) ----
-resource "azurerm_disk_encryption_set" "des" {
-  name                      = "des-grc-tf"
-  location                  = azurerm_resource_group.rg.location
-  resource_group_name       = azurerm_resource_group.rg.name
-  key_vault_key_id          = azapi_resource.cmk.output.properties.keyUri
-  encryption_type           = "EncryptionAtRestWithPlatformAndCustomerKeys"
-  auto_key_rotation_enabled = true
-  tags                      = var.tags
+# Created through the ARM API (azapi) for the same reason as the key: the
+# azurerm version reads the key over the vault's public endpoint, which is off.
+resource "azapi_resource" "des" {
+  type      = "Microsoft.Compute/diskEncryptionSets@2024-03-02"
+  name      = "des-grc-tf"
+  location  = azurerm_resource_group.rg.location
+  parent_id = azurerm_resource_group.rg.id
+  tags      = var.tags
 
   identity {
     type = "SystemAssigned"
+  }
+
+  body = {
+    properties = {
+      encryptionType                    = "EncryptionAtRestWithPlatformAndCustomerKeys"
+      rotationToLatestKeyVersionEnabled = true
+      activeKey = {
+        keyUrl      = azapi_resource.cmk.output.properties.keyUri
+        sourceVault = { id = azurerm_key_vault.kv.id }
+      }
+    }
   }
 }
 
 resource "azurerm_role_assignment" "des_crypto" {
   scope                = azurerm_key_vault.kv.id
   role_definition_name = "Key Vault Crypto Service Encryption User"
-  principal_id         = azurerm_disk_encryption_set.des.identity[0].principal_id
+  principal_id         = azapi_resource.des.identity[0].principal_id
 }
 
 # Role assignments take a few minutes to apply. Wait before building the disk.
