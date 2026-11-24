@@ -170,7 +170,7 @@
         <span class="tools-tag">NIST SP 800-53 Rev. 5 · FIPS 199 · NIST SP 800-30 · Azure Policy · Azure Bastion · NSG</span>
         <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-1-locked-down-vm" target="_blank">View project and evidence on GitHub &rarr;</a></p>
       </div>
-            <div class="project-card">
+      <div class="project-card">
         <h3>Azure Key Vault &amp; Customer-Managed Keys: SC-12 Standard, SSP v2 &amp; Re-Assessment</h3>
         <p class="project-meta">Independent Cloud GRC Project &nbsp;|&nbsp; Microsoft Azure &nbsp;|&nbsp; November 2026</p>
         <p>Extended the locked-down VM with Azure Key Vault, customer-managed disk encryption, a least-privilege managed identity, and central logging, then re-assessed it against NIST SP 800-53 Rev. 5 and updated the SSP, POA&amp;M, and risk register. Wrote a Cryptographic Key Management Standard for the system.</p>
@@ -182,6 +182,19 @@
         <span class="tools-tag">NIST SP 800-53 Rev. 5 · SC-12 · Azure Key Vault · Managed Identity · Log Analytics / KQL · Azure Policy</span>
         <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-2-key-vault" target="_blank">View project and evidence on GitHub &rarr;</a></p>
       </div>
+      <div class="project-card">
+        <h3>Infrastructure as Code with a Security Gate: Terraform, Checkov &amp; Configuration Management Plan</h3>
+        <p class="project-meta">Independent Cloud GRC Project &nbsp;|&nbsp; Microsoft Azure &amp; GitHub Actions &nbsp;|&nbsp; November 2026</p>
+        <p>Rebuilt the Azure system entirely in Terraform behind a GitHub Actions pipeline that runs Checkov on every pull request and blocks insecure changes from reaching main. Re-assessed against NIST SP 800-53 Rev. 5, wrote a Configuration Management Plan (CM-9), and updated the SSP and POA&amp;M.</p>
+        <ul>
+          <li>Proved the gate: a test change opening SSH to the internet and Key Vault to public traffic failed Checkov and could not merge.</li>
+          <li>Moved Key Vault behind a private endpoint; even an authorized admin was refused from outside the network, while the VM got 200 on its one secret and 403 on the rest.</li>
+          <li>Cut non-compliant NIST controls from 17 to 12 and closed 6 POA&amp;M items, including a privilege-change detection gap (PIM) found by testing the alert.</li>
+        </ul>
+        <span class="tools-tag">NIST SP 800-53 Rev. 5 · CM-3 / CM-9 · Terraform · GitHub Actions · Checkov · Azure Private Link · Azure Monitor</span>
+        <p><a href="https://github.com/Tyrell-F/GRC_portfolio/tree/main/project-3-terraform" target="_blank">View project, code, and evidence on GitHub &rarr;</a></p>
+      </div>
+      
       <div class="project-card">
         <h3>Third-Party Risk Assessment &amp; Security Documentation</h3>
         <p class="project-meta">Graduate Coursework &amp; Professional Application &nbsp;|&nbsp; St. John's University</p>
