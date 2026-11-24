@@ -1,6 +1,8 @@
 # Security gate for the Project 3 Terraform code (CM-3, SA-11, RA-5).
 # Runs on every pull request and every push to main. It needs no Azure
 # credentials: it only reads the code.
+# Actions are pinned to full commit SHAs (POAM-17, SR-3): a moved or
+# compromised tag cannot change what runs. Dependabot proposes updates.
 name: terraform-checkov
 
 on:
@@ -21,8 +23,8 @@ jobs:
     name: terraform fmt and validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
         with:
           terraform_version: 1.9.8
       - name: Format check
@@ -36,9 +38,9 @@ jobs:
     name: checkov scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Run Checkov
-        uses: bridgecrewio/checkov-action@v12
+        uses: bridgecrewio/checkov-action@d4770c1ac4a966d8c3305b79c348c26232123aa1 # v12.3146.0
         with:
           directory: project-3-terraform/terraform
           framework: terraform
@@ -47,7 +49,7 @@ jobs:
           soft_fail: false # any failed check fails the pull request
       - name: Upload results to the Security tab
         if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@d2aacf54c2fbc910db8d7ec338fdb54ea48c692d # v3.39.4
         with:
           sarif_file: results.sarif
           category: checkov
