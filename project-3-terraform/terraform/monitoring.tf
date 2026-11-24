@@ -90,7 +90,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "role_change" {
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   scopes                = [azurerm_log_analytics_workspace.law.id]
-  description           = "A role assignment was created or deleted in the subscription."
+  description           = "A role assignment (classic or PIM eligible/active) was created or removed in the subscription."
   severity              = 2
   evaluation_frequency  = "PT15M"
   window_duration       = "PT15M"
@@ -100,8 +100,9 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "role_change" {
   criteria {
     query                   = <<-KQL
       AzureActivity
-      | where OperationNameValue in~ ("Microsoft.Authorization/roleAssignments/write", "Microsoft.Authorization/roleAssignments/delete")
-      | where ActivityStatusValue =~ "Success"
+            | where OperationNameValue has_any ("roleAssignments", "roleAssignmentScheduleRequests", "roleEligibilityScheduleRequests")
+          or OperationNameValue contains "role in PIM"
+      | where ActivityStatusValue !~ "Failure"
     KQL
     time_aggregation_method = "Count"
     threshold               = 0
